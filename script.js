@@ -15,6 +15,16 @@ function clock () {
   ctx.lineWidth = 5;
   ctx.lineCap = 'round';
 
+  // Draw clock face/border
+  ctx.save(); // it will save the state everything before it
+  ctx.beginPath();
+  ctx.lineWidth = 14;
+  ctx.strokeStyle = '#800000'; // this will be applied only in between save and restore
+  ctx.arc(0, 0, 142, 0, Math.PI * 2, true);
+  ctx.stroke(); // when I call ctx.stroke, thats when its gonna draw the circle
+  ctx.fill();
+  ctx.restore();
+
 
   ctx.restore(); // restore default state
 }
