@@ -51,6 +51,12 @@ function clock () {
   }
   ctx.restore();
 
+  // Get current time
+  const hr = now.getHours() % 12; // giving us 12 hours instead of 24
+  const min = now.getMinutes();
+  const sec = now.getSeconds();
+
+  console.log(`${hr}:${min}:${sec}`)
 
   ctx.restore(); // restore default state
 }
