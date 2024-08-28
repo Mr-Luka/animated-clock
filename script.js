@@ -1,3 +1,10 @@
+const faceColor = document.querySelector('#face-color');
+const borderColor = document.querySelector('#border-color');
+const lineColor = document.querySelector('#line-color');
+const largeHandColor = document.querySelector('#large-hand-color');
+const secondHandColor = document.querySelector('#second-hand-color');
+
+
 function clock () {
   const now = new Date();
   const canvas = document.querySelector('#canvas');
@@ -19,7 +26,8 @@ function clock () {
   ctx.save(); // it will save the state everything before it
   ctx.beginPath();
   ctx.lineWidth = 14;
-  ctx.strokeStyle = '#800000'; // this will be applied only in between save and restore
+  ctx.strokeStyle = borderColor.value; // this will be applied only in between save and restore
+  ctx.fillStyle = faceColor.value;
   ctx.arc(0, 0, 142, 0, Math.PI * 2, true);
   ctx.stroke(); // when I call ctx.stroke, thats when its gonna draw the circle
   ctx.fill();
@@ -27,6 +35,7 @@ function clock () {
 
   // Draw hour mark/lines
   ctx.save();
+  ctx.strokeStyle = lineColor.value;
   for( let i = 0; i < 12; i++) {
     ctx.beginPath();
     ctx.rotate(Math.PI / 6);
@@ -40,6 +49,7 @@ function clock () {
   // Draw minute marks/lines
     ctx.save();
     ctx.lineWidth = 4;
+    ctx.strokeStyle = lineColor.value;
   for( let i = 0; i < 60; i++) {
     if(i % 5 !== 0) { // so it doesnt draw on the same line as an hour line
       ctx.beginPath();
@@ -61,7 +71,7 @@ function clock () {
   // Draw hour hand
   ctx.save();
   ctx.rotate((Math.PI / 6) * hr + (Math.PI / 360) * min + (Math.PI / 21600) * sec);
-  ctx.strokeStyle = '#800000';
+  ctx.strokeStyle = largeHandColor.value;
   ctx.lineWidth = 14;
   ctx.beginPath();
   ctx.moveTo(-20, 0);
@@ -72,7 +82,7 @@ function clock () {
   // Draw minute hand
   ctx.save();
   ctx.rotate((Math.PI / 30) * min + (Math.PI / 1800) * sec);
-  ctx.strokeStyle = '#800000';
+  ctx.strokeStyle = largeHandColor.value;
   ctx.lineWidth = 10;
   ctx.beginPath();
   ctx.moveTo(-28, 0);
@@ -83,8 +93,8 @@ function clock () {
   // Draw second hand / seconds
    ctx.save();
   ctx.rotate((sec * Math.PI / 30));
-  ctx.strokeStyle = '#FF7F50';
-  ctx.fillStyle = '#FF7F50'
+  ctx.strokeStyle = secondHandColor.value;
+  ctx.fillStyle = secondHandColor.value;
   ctx.lineWidth = 6;
   ctx.beginPath();
   ctx.moveTo(-30, 0);
